@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id             String   @id @default(cuid())
+  email          String   @unique
+  name           String
+  avatarUrl      String?
+  authProvider   String // "google" | "apple"
+  authProviderId String   @unique
+  totalPoints    Int      @default(0) // all-time, denormalized for fast leaderboard reads
+  monthlyPoints  Int      @default(0) // resets each month, denormalized
+  currentTier    String   @default("none") // "none" | "bronze" | "silver" | "gold"
+  createdAt      DateTime @default(now())
+  logs           Log[]
+}
+
+model Log {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+  activityType String // references ActivityType.key
+  points       Int // snapshot of points awarded at time of log (don't recompute later if config changes)
+  companyName  String
+  contactName  String?
+  outcome      String // "no_response" | "said_no" | "asked_followup" | "interested"
+  notes        String?
+  createdAt    DateTime @default(now())
+
+  @@index([userId])
+  @@index([createdAt])
+  @@index([companyName])
+}
+
+model ActivityType {
+  key       String  @id // e.g. "cold_email"
+  label     String // "Cold Email"
+  category  String // "online" | "in_person"
+  points    Int // default point value, admin-editable via config, not user-editable
+  sortOrder Int
+  active    Boolean @default(true)
+}
+
+model MonthlySnapshot {
+  id            String   @id @default(cuid())
+  month         String   @unique // "2026-08"
+  totalPoints   Int
+  dollarsEarned Float
+  cappedAt      Float? // null if uncapped that month
+  createdAt     DateTime @default(now())
+}
+
+model Config {
+  key   String @id // e.g. "monthly_dollar_cap", "points_per_dollar_ratio"
+  value String // stored as string, parsed by type at runtime
+}
