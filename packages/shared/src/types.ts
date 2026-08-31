@@ -3,6 +3,29 @@ import type { Tier } from "./tiers";
 
 export type ActivityCategory = "online" | "in_person";
 
+export interface UserDTO {
+  id: string;
+  name: string;
+  email: string;
+  avatarUrl: string | null;
+  totalPoints: number;
+  monthlyPoints: number;
+  currentTier: Tier;
+}
+
+export interface AuthCallbackRequest {
+  provider: "google" | "apple";
+  idToken: string;
+  // Apple only ever provides the user's name on their very first sign-in, via
+  // the native SDK response (never inside the identity token itself).
+  name?: string;
+}
+
+export interface AuthCallbackResponse {
+  token: string;
+  user: UserDTO;
+}
+
 export interface ActivityTypeDTO {
   key: string;
   label: string;

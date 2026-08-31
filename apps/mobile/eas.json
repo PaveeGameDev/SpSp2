@@ -1,0 +1,23 @@
+{
+  "cli": {
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "ios": {
+        "simulator": true
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "http://localhost:3000",
+        "EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID": "781669030617-ib94ljh1m5cmblficb8cocvbdbe6p6nv.apps.googleusercontent.com",
+        "EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID": "781669030617-ioo81sqsqur72l7mi5ko5clen1kq088e.apps.googleusercontent.com"
+      }
+    },
+    "preview": {
+      "distribution": "internal"
+    },
+    "production": {}
+  }
+}
