@@ -17,8 +17,8 @@ export default async function HistoryPage() {
 
   return (
     <div>
-      <h1 style={{ marginBottom: 16 }}>Your history</h1>
-      {logs.length === 0 && <p className="muted">You haven&apos;t logged anything yet.</p>}
+      <h1 style={{ marginBottom: 16 }}>Your Rap Sheet</h1>
+      {logs.length === 0 && <p className="muted">Clean record so far — go pull a job.</p>}
       {logs.map((log) => (
         <div key={log.id} className="list-row">
           <span>

@@ -1,41 +1,44 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Big_Shoulders_Stencil, Rajdhani } from "next/font/google";
 import Link from "next/link";
 
 import { getSessionUser } from "@/lib/getSessionUser";
 
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const stencil = Big_Shoulders_Stencil({
+  variable: "--font-stencil",
   subsets: ["latin"],
+  weight: ["700", "800"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const rajdhani = Rajdhani({
+  variable: "--font-body",
   subsets: ["latin"],
+  weight: ["500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "SpeedySponsor",
-  description: "Log sponsor outreach, earn points, unlock the team's monthly $ pool.",
+  title: "SpeedySponsor — Team H.E.I.S.T. #10077",
+  description: "Log the job, count the loot, unlock the crew's monthly sponsor vault.",
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
   const user = await getSessionUser();
 
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${stencil.variable} ${rajdhani.variable}`}>
       <body>
         {user && (
           <header className="header">
-            <Link href="/" style={{ fontWeight: 700 }}>
+            <Link href="/" className="brand">
+              <span className="vault-dial" aria-hidden="true" />
               SpeedySponsor
             </Link>
             <nav>
-              <Link href="/leaderboard">Leaderboard</Link>
-              <Link href="/history">History</Link>
-              <Link href="/log">Log activity</Link>
+              <Link href="/leaderboard">Most Wanted</Link>
+              <Link href="/history">Rap Sheet</Link>
+              <Link href="/log">Pull a Job</Link>
               <span className="avatar" title={user.name}>
                 {user.name.slice(0, 1).toUpperCase()}
               </span>

@@ -1,7 +1,7 @@
 import type { Tier } from "@sponsor/shared";
 
 const LABEL: Record<Tier, string> = {
-  none: "No tier yet",
+  none: "No Vault Yet",
   bronze: "Bronze",
   silver: "Silver",
   gold: "Gold",

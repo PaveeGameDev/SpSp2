@@ -63,7 +63,7 @@ export function LogForm({ activityTypes }: { activityTypes: ActivityTypeDTO[] })
         return;
       }
       const result = data as CreateLogResponse;
-      setToast(`+${result.log.points} points${result.tierCrossed ? ` 🎉 ${result.tierCrossed} tier!` : ""}`);
+      setToast(`+${result.log.points} pts${result.tierCrossed ? ` — 🔓 ${result.tierCrossed} vault unlocked!` : ""}`);
 
       if (after === "home") {
         router.push("/");
@@ -83,8 +83,8 @@ export function LogForm({ activityTypes }: { activityTypes: ActivityTypeDTO[] })
   if (step === "pick") {
     return (
       <div>
-        {toast && <p style={{ color: "#16a34a", fontWeight: 600, marginBottom: 16 }}>{toast}</p>}
-        <h2 style={{ marginBottom: 8 }}>Online</h2>
+        {toast && <p style={{ color: "var(--accent-bright)", fontWeight: 700, marginBottom: 16 }}>{toast}</p>}
+        <h2 style={{ marginBottom: 8 }}>Remote Jobs</h2>
         <div className="activity-grid" style={{ marginBottom: 24 }}>
           {online.map((a) => (
             <button key={a.key} className="activity-card" onClick={() => pick(a.key)}>
@@ -93,7 +93,7 @@ export function LogForm({ activityTypes }: { activityTypes: ActivityTypeDTO[] })
             </button>
           ))}
         </div>
-        <h2 style={{ marginBottom: 8 }}>In Person</h2>
+        <h2 style={{ marginBottom: 8 }}>On-Site Jobs</h2>
         <div className="activity-grid">
           {inPerson.map((a) => (
             <button key={a.key} className="activity-card" onClick={() => pick(a.key)}>
@@ -169,10 +169,10 @@ export function LogForm({ activityTypes }: { activityTypes: ActivityTypeDTO[] })
 
       <div style={{ display: "flex", gap: 12 }}>
         <button className="button button-primary" disabled={submitting} onClick={() => submit("home")}>
-          Save & Home
+          Bank It & Go Home
         </button>
         <button className="button" disabled={submitting} onClick={() => submit("another")}>
-          Save & Log Another
+          Bank It & Pull Another
         </button>
       </div>
     </div>

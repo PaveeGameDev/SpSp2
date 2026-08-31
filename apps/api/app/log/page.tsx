@@ -15,7 +15,7 @@ export default async function LogPage() {
 
   return (
     <div>
-      <h1 style={{ marginBottom: 16 }}>Log an activity</h1>
+      <h1 style={{ marginBottom: 16 }}>Pull a Job</h1>
       <LogForm
         activityTypes={activityTypes.map((a) => ({
           key: a.key,

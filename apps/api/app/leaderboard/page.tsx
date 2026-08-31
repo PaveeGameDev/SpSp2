@@ -12,7 +12,7 @@ export default async function LeaderboardPage() {
 
   return (
     <div>
-      <h1 style={{ marginBottom: 16 }}>Leaderboard</h1>
+      <h1 style={{ marginBottom: 16 }}>Most Wanted</h1>
       <LeaderboardList alltime={alltime} monthly={monthly} currentUserId={user.id} />
     </div>
   );
